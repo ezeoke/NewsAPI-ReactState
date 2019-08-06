@@ -40,14 +40,17 @@ class APICall extends React.Component {
 
   matchQuery = () => {
     const objKey = Object.keys(countryCodes);
-    const objValue = Object.values(countryCodes);
 
     const objData = objKey.filter(
-      item => item.toLowerCase() == this.state.country.toLowerCase()
+      item => item.toLowerCase() == this.state.value.toLowerCase()
     );
-
     console.log(objData);
-    console.log(objKey);
+
+    for (let key in countryCodes) {
+      if (key === objData) {
+        console.log(countryCodes[key]);
+      }
+    }
   };
 
   render() {
