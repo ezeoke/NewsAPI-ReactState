@@ -1,5 +1,6 @@
 import React from "react";
 import countryCodes from "./countries";
+import Content from "./Content";
 
 const Api_key = process.env.REACT_APP_API_KEY;
 
@@ -18,6 +19,9 @@ class APICall extends React.Component {
     );
     const data = await response.json();
     console.log(data);
+    this.setState(prevState => ({
+      dataSet: prevState.dataSet.concat(data)
+    }));
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -28,7 +32,10 @@ class APICall extends React.Component {
         }&apiKey=${Api_key}`
       );
       const data = await response.json();
-      console.log(data);
+      this.setState(prevState => ({
+        dataSet: prevState.dataSet.concat(data)
+      }));
+      console.log(data, "second data");
     }
   }
 
@@ -38,8 +45,7 @@ class APICall extends React.Component {
     });
   };
 
-  updateSearch = e => {
-    e.preventDefault();
+  updateSearch = () => {
     const objKey = Object.keys(countryCodes);
 
     const objData = objKey.filter(
@@ -53,23 +59,25 @@ class APICall extends React.Component {
         countryCode = countryCodes[key].split(" ")[0];
       }
     }
-
+    console.log(countryCode, "countrr");
     this.setState({
       country: countryCode
     });
   };
 
   render() {
+    // console.log(this.state, "state");
     return (
       <div>
-        <form onSubmit={this.updateSearch}>
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-          <button>search</button>
-        </form>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+        <button onClick={this.updateSearch}>search</button>
+        <div>
+          <Content content={this.state.dataSet} />
+        </div>
       </div>
     );
   }
