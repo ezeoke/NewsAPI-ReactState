@@ -17,7 +17,7 @@ class APICall extends React.Component {
       }&apiKey=${Api_key}`
     );
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -38,36 +38,38 @@ class APICall extends React.Component {
     });
   };
 
-  updateSearch = () => {
-    this.setState(prevState => ({
-      country: (prevState.country = this.matchQuery())
-    }));
-  };
-
-  matchQuery = () => {
+  updateSearch = e => {
+    e.preventDefault();
     const objKey = Object.keys(countryCodes);
 
     const objData = objKey.filter(
       item => item.toLowerCase() === this.state.value.toLowerCase()
     );
 
+    let countryCode = "";
+
     for (let key in countryCodes) {
       if (objData[0] === key) {
-        console.log(countryCodes[key].split(" ")[0]);
-        return countryCodes[key].split(" ")[0];
+        countryCode = countryCodes[key].split(" ")[0];
       }
     }
+
+    this.setState({
+      country: countryCode
+    });
   };
 
   render() {
     return (
       <div>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-        <button onClick={this.updateSearch}>search</button>
+        <form onSubmit={this.updateSearch}>
+          <input
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          <button>search</button>
+        </form>
       </div>
     );
   }
