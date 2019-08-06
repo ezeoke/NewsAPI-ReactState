@@ -17,12 +17,18 @@ class APICall extends React.Component {
       }&apiKey=${Api_key}`
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     if (prevState.country !== this.state.country) {
-      this.matchQuery();
+      const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?country=${
+          this.state.country
+        }&apiKey=${Api_key}`
+      );
+      const data = await response.json();
+      console.log(data);
     }
   }
 
@@ -33,22 +39,22 @@ class APICall extends React.Component {
   };
 
   updateSearch = () => {
-    this.setState({
-      country: this.state.value
-    });
+    this.setState(prevState => ({
+      country: (prevState.country = this.matchQuery())
+    }));
   };
 
   matchQuery = () => {
     const objKey = Object.keys(countryCodes);
 
     const objData = objKey.filter(
-      item => item.toLowerCase() == this.state.value.toLowerCase()
+      item => item.toLowerCase() === this.state.value.toLowerCase()
     );
-    console.log(objData);
 
     for (let key in countryCodes) {
-      if (key === objData) {
-        console.log(countryCodes[key]);
+      if (objData[0] === key) {
+        console.log(countryCodes[key].split(" ")[0]);
+        return countryCodes[key].split(" ")[0];
       }
     }
   };
