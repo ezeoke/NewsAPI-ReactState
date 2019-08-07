@@ -1,4 +1,5 @@
 import React from "react";
+import contentStyles from "../styles/Content.module.css";
 
 const Content = props => {
   const { content, loading } = props;
@@ -6,8 +7,8 @@ const Content = props => {
   return (
     <div>
       {!loading
-        ? content.articles.map(item => (
-            <div>
+        ? content.articles.map((item, index) => (
+            <div key={index}>
               <h3>{item.title.toUpperCase()}</h3>
               <img
                 src={item.urlToImage}
@@ -15,6 +16,9 @@ const Content = props => {
                 style={{ width: "70%", height: "40%" }}
               />
               <p>{item.description}</p>
+              <a href={item.url} target="blank">
+                ...full story
+              </a>
             </div>
           ))
         : "Loading..."}

@@ -90,9 +90,11 @@ class APICall extends React.Component {
           type="text"
           value={this.state.value}
           onChange={this.handleChange}
+          placeholder="country name"
         />
         <button onClick={this.updateSearch}>search</button>
         <div>
+          {/* here i passed the loading and dataset/api data to the content component for rendering */}
           <Content loading={this.state.loading} content={this.state.dataSet} />
         </div>
       </div>
