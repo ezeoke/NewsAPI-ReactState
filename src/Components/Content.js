@@ -3,7 +3,7 @@ import contentStyles from "../styles/Content.module.css";
 
 const Content = props => {
   const { content, loading } = props;
-
+  console.log(content);
   return (
     <div>
       {!loading
@@ -15,7 +15,7 @@ const Content = props => {
                 alt="please visit news_api"
                 style={{ width: "70%", height: "40%" }}
               />
-              <p>{item.description}</p>
+              <p>{item.content}</p>
               <a href={item.url} target="blank">
                 ...full story
               </a>

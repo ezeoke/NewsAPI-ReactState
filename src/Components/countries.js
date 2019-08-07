@@ -241,6 +241,35 @@ const countryCodes = {
   Zimbabwe: "ZW / ZWE"
 };
 
-const countries = ["United Arab Emirates"];
+const countries = [
+  "nigeria",
+  "United Arab Emirates",
+  "united states",
+  "united kingdom",
+  "russia",
+  "nigeria",
+  "australia",
+  "south africa",
+  "china",
+  "germany",
+  "france",
+  "austria",
+  "switzerland",
+  "japan",
+  "India",
+  "Italy",
+  "israel",
+  "Argentina",
+  "Belgium",
+  "bulgaria",
+  "brazil",
+  "colombia",
+  "cuba",
+  "Czech Republic",
+  "egypt",
+  "hong kong",
+  "greece",
+  "hungary"
+];
 
-export default countryCodes;
+export { countries, countryCodes };

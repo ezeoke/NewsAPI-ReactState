@@ -1,5 +1,5 @@
 import React from "react";
-import countryCodes from "./countries";
+import { countries, countryCodes } from "./countries";
 import Content from "./Content";
 import apiStyles from "../styles/API.module.css";
 
@@ -10,7 +10,7 @@ class APICall extends React.Component {
   //The various states in play
   state = {
     dataSet: [],
-    value: "",
+    value: "nigeria",
     country: "NG",
     loading: true,
     k: true
@@ -38,6 +38,7 @@ class APICall extends React.Component {
   //this async/await lifecycle triggers when a value is entered an searched
   async componentDidUpdate(prevProps, prevState) {
     if (prevState.country !== this.state.country) {
+      this.setState({ loading: true });
       const response = await fetch(
         `https://newsapi.org/v2/top-headlines?country=${
           this.state.country
@@ -61,16 +62,10 @@ class APICall extends React.Component {
     });
     this.updateSearch(data);
   };
+
   /*this is a super algorithm. sexy hacking!!! Thanks to George for the initiative and help....badass hacker. 
   this function has access to country/country codes data from the country component. It looks for the current input value and finds a match in the countries component object. It then gets the corresponding initials of the matched country and returns it */
 
-  // changeK =()=>{
-  //   this.setState(prev =>{
-  //     return {
-  //       k: !prev.k
-  //     }
-  //   })
-  // }
   matchQuery = data => {
     const objKey = Object.keys(countryCodes);
     console.log(data, "data");
@@ -92,6 +87,7 @@ class APICall extends React.Component {
   //this function fires when the 'search' button is clicked. it updates the country state with the returned value from the matchquery function. this updated state serves as a query for the searched country
   updateSearch = data => {
     // console.log(this.state.country, "hiiiiiiiiiiiii", this.state.value);
+    console.log(this.state.value, "lllllll");
     if (!this.state.value) return;
     this.setState({
       country: this.matchQuery(data)
@@ -99,6 +95,7 @@ class APICall extends React.Component {
   };
 
   render() {
+    const AllCountries = countries.map(country => country);
     return (
       <div style={apiStyles.body}>
         {/* <input
@@ -109,14 +106,12 @@ class APICall extends React.Component {
         /> */}
         <select onChange={this.handleChange}>
           <option value="nigeria">select a country</option>
-          <option value="nigeria">nigeria</option>
-          <option value="united arab emirates">UAE</option>
-          <option value="united kingdom"> Britain</option>
-          <option value="united states">usa</option>
-          <option value="canada">canada</option>
+          {countries.map(country => (
+            <option value={country}>{country}</option>
+          ))}
         </select>
         <br />
-        <button onClick={this.updateSearch}>search</button>
+        {/* <button onClick={this.updateSearch}>search</button> */}
         <div>
           {/* here i passed the loading and dataset/api data to the content component for rendering */}
           <Content loading={this.state.loading} content={this.state.dataSet} />
