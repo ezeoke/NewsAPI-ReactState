@@ -11,7 +11,7 @@ const Content = props => {
               <h3>{item.title.toUpperCase()}</h3>
               <img
                 src={item.urlToImage}
-                alt=""
+                alt="please visit news_api"
                 style={{ width: "70%", height: "40%" }}
               />
               <p>{item.description}</p>
