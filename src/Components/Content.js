@@ -1,10 +1,24 @@
 import React from "react";
 
 const Content = props => {
+  const { content, loading } = props;
+
   return (
-    <div>{/* {props.content.map(item => {
-        item.author
-      })} */}</div>
+    <div>
+      {!loading
+        ? content.articles.map(item => (
+            <div>
+              <h3>{item.title.toUpperCase()}</h3>
+              <img
+                src={item.urlToImage}
+                alt=""
+                style={{ width: "70%", height: "40%" }}
+              />
+              <p>{item.description}</p>
+            </div>
+          ))
+        : "Loading..."}
+    </div>
   );
 };
 

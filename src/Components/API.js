@@ -6,9 +6,10 @@ const Api_key = process.env.REACT_APP_API_KEY;
 
 class APICall extends React.Component {
   state = {
-    dataSet: "",
+    dataSet: [],
     value: "",
-    country: "NG"
+    country: "NG",
+    loading: true
   };
 
   async componentDidMount() {
@@ -19,9 +20,11 @@ class APICall extends React.Component {
     );
     const data = await response.json();
     console.log(data);
-    this.setState(prevState => ({
-      dataSet: prevState.dataSet.concat(data)
-    }));
+    this.setState({
+      loading: false,
+      dataSet: data
+    });
+    console.log(this.state.dataSet.articles);
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -32,10 +35,12 @@ class APICall extends React.Component {
         }&apiKey=${Api_key}`
       );
       const data = await response.json();
-      this.setState(prevState => ({
-        dataSet: prevState.dataSet.concat(data)
-      }));
-      console.log(data, "second data");
+      console.log(data);
+      this.setState({
+        loading: false,
+        dataSet: data
+      });
+      console.log(this.state.dataSet);
     }
   }
 
@@ -45,7 +50,7 @@ class APICall extends React.Component {
     });
   };
 
-  updateSearch = () => {
+  matchQuery = () => {
     const objKey = Object.keys(countryCodes);
 
     const objData = objKey.filter(
@@ -59,14 +64,18 @@ class APICall extends React.Component {
         countryCode = countryCodes[key].split(" ")[0];
       }
     }
-    console.log(countryCode, "countrr");
+
+    return countryCode;
+  };
+
+  updateSearch = () => {
+    if (!this.state.value) return;
     this.setState({
-      country: countryCode
+      country: this.matchQuery()
     });
   };
 
   render() {
-    // console.log(this.state, "state");
     return (
       <div>
         <input
@@ -76,7 +85,7 @@ class APICall extends React.Component {
         />
         <button onClick={this.updateSearch}>search</button>
         <div>
-          <Content content={this.state.dataSet} />
+          <Content loading={this.state.loading} content={this.state.dataSet} />
         </div>
       </div>
     );
