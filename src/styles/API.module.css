@@ -1,0 +1,12 @@
+body {
+	width: 80%;
+	margin: auto
+}
+
+body input {
+	display: flex;
+	width: 40%;
+	align-self: center
+}
+
+body button {}

@@ -1,6 +1,7 @@
 import React from "react";
 import countryCodes from "./countries";
 import Content from "./Content";
+import apiStyles from "../styles/API.module.css";
 
 //The API key from news_api is stored in the .env.development for private access
 const Api_key = process.env.REACT_APP_API_KEY;
@@ -85,13 +86,19 @@ class APICall extends React.Component {
 
   render() {
     return (
-      <div>
-        <input
+      <div style={apiStyles.body}>
+        {/* <input
           type="text"
           value={this.state.value}
           onChange={this.handleChange}
           placeholder="country name"
-        />
+        /> */}
+        <select onChange={this.handleChange}>
+          <option value="">select a country</option>
+          <option value="nigeria">nigeria</option>
+          <option value="france">france</option>
+        </select>
+        <br />
         <button onClick={this.updateSearch}>search</button>
         <div>
           {/* here i passed the loading and dataset/api data to the content component for rendering */}

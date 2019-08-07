@@ -241,4 +241,6 @@ const countryCodes = {
   Zimbabwe: "ZW / ZWE"
 };
 
+const countries = ["United Arab Emirates"];
+
 export default countryCodes;
