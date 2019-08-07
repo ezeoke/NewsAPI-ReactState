@@ -3,6 +3,21 @@ import contentStyles from "../styles/Content.module.css";
 
 const Content = props => {
   const { content, loading } = props;
+  const loader = (
+    <div>
+      <div
+        class="tenor-gif-embed"
+        data-postid="9856796"
+        data-share-method="host"
+        data-width="100%"
+        data-aspect-ratio="1.5"
+      >
+        <a href="https://tenor.com/view/loading-gif-9856796">Loading GIF</a>{" "}
+        from <a href="https://tenor.com/search/loading-gifs">Loading GIFs</a>
+      </div>
+      <script type="text/javascript" async src="https://tenor.com/embed.js" />
+    </div>
+  );
 
   return (
     <div>
@@ -21,7 +36,7 @@ const Content = props => {
               </a>
             </div>
           ))
-        : "Loading..."}
+        : loader}
     </div>
   );
 };
