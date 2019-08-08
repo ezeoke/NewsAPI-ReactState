@@ -17,3 +17,9 @@ body {
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	padding: 1%
 }
+
+@media only screen and (max-width: 480px) {
+	.wrapper select {
+		width: 60%
+	}
+}
