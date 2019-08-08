@@ -1,3 +1,22 @@
 .wrapper {
 	/* background: blue */
 }
+
+.wrapper a {
+	text-decoration: none;
+	color: black
+}
+
+.wrapper img {
+	width: 2%;
+	height: 2%;
+	color: blue
+}
+
+.fa {
+	color: yellow
+}
+
+.api:hover {
+	color: red
+}
