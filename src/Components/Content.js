@@ -5,7 +5,6 @@ import showMore from "./images/images2.png";
 
 const Content = props => {
   const { content, loading } = props;
-  console.log(content);
   return (
     <div className={contentStyles.wrapper}>
       {!loading ? (
