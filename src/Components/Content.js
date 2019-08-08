@@ -4,26 +4,28 @@ import giphy from "./images/giphy.gif";
 import showMore from "./images/images2.png";
 
 const Content = props => {
-  const { content, loading, heading } = props;
+  const { content, loading } = props;
   console.log(content);
   return (
-    <div style={contentStyles.body}>
-      <h2>{heading && `Latest Happenings in ${heading}`}</h2>
+    <div className={contentStyles.wrapper}>
       {!loading ? (
         content.articles.map((item, index) => (
-          <div style={contentStyles.content} key={index}>
-            <h4>{item.title.toUpperCase()}</h4>
-            <img
-              src={item.urlToImage}
-              alt="please visit news_api"
-              style={{ width: "70%", height: "40%" }}
-            />
-            <p>
-              {item.description} &nbsp;
-              <a href={item.url} target="blank">
-                <img src={showMore} alt="" style={{ width: "1.5%" }} />
-              </a>
-            </p>
+          <div className={contentStyles.content} key={index}>
+            <h3>{item.title.toUpperCase()}</h3>
+            <div className={contentStyles.flexCont}>
+              <img
+                // src={item.urlToImage}
+                alt="Oops...!"
+                style={{ width: 390, height: 280, color: "red" }}
+              />
+              <p>
+                {item.description} &nbsp;
+                <a href={item.url} target="blank">
+                  Read More &nbsp;
+                  <img src={showMore} alt="" style={{ width: "1.5%" }} />
+                </a>
+              </p>
+            </div>
             <br />
             <br />
           </div>

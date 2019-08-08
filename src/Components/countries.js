@@ -279,7 +279,6 @@ const countries = [
   "Portugal",
   "Romania",
   "Russia",
-  "Saudi Arabia",
   "Singapore",
   "Slovenia",
   "Slovakia",
