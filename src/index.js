@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import APICall from "./Components/API";
+import "../node_modules/font-awesome/css/font-awesome.min.css";
 
 ReactDOM.render(<APICall />, document.getElementById("root"));
 

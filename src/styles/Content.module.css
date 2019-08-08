@@ -1,16 +1,40 @@
 body {
-	text-align: center
+	text-align: center;
 }
 
-body h4 {
-	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+.wrapper {
+	border: 1px solid #CACACA;
+	width: 90%;
+	margin: auto;
+	background: white;
+	margin-top: 0vmax
 }
 
-body p {
+.wrapper a {
+	text-decoration: none;
+	color: #CACACA
+}
+
+.wrapper a:hover {
+	color: blue
+}
+
+.wrapper h3 {
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: 530
+}
+
+.wrapper p {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-content img {
-	width: 40%;
-	height: 10vh
+/* .content img {
+	width: 30%;
+	height: 5vh
+} */
+
+.flexCont {
+	/* display: flex; */
+	width: 80%;
+	margin: auto
 }

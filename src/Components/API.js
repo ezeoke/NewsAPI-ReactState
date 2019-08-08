@@ -2,6 +2,7 @@ import React from "react";
 import { countries, countryCodes } from "./countries";
 import Content from "./Content";
 import apiStyles from "../styles/API.module.css";
+import Footer from "./Footer";
 
 //The API key from news_api is stored in the .env.development for private access
 const Api_key = process.env.REACT_APP_API_KEY;
@@ -91,7 +92,12 @@ class APICall extends React.Component {
 
   render() {
     return (
-      <div style={apiStyles.body}>
+      <div className={apiStyles.wrapper}>
+        <h2>
+          {this.state.country === "NG"
+            ? `Current News in Nigeria`
+            : `Current News in ${this.state.value}`}
+        </h2>
         <select value={this.state.value} onChange={this.handleChange}>
           <option value="">select a country</option>
           {countries.map((country, index) => (
@@ -100,14 +106,10 @@ class APICall extends React.Component {
             </option>
           ))}
         </select>
-        <div>
-          {/* here i passed the loading and dataset/api data to the content component for rendering */}
-          <Content
-            loading={this.state.loading}
-            content={this.state.dataSet}
-            heading={this.state.value}
-          />
-        </div>
+
+        {/* here i passed the loading and dataset/api data to the content component for rendering */}
+        <Content loading={this.state.loading} content={this.state.dataSet} />
+        <Footer />
       </div>
     );
   }
