@@ -1,5 +1,5 @@
 import React from "react";
-import countryCodes from "./countries";
+import { countries, countryCodes } from "./countries";
 import Content from "./Content";
 import apiStyles from "../styles/API.module.css";
 
@@ -15,6 +15,7 @@ class APICall extends React.Component {
     loading: true
   };
 
+  // handleGetNews = () => {};
   //This async lifecycle mounts with the default state when the application is started
   async componentDidMount() {
     //This an API fetch request with query and API key
@@ -35,6 +36,7 @@ class APICall extends React.Component {
   //this async/await lifecycle triggers when a value is entered an searched
   async componentDidUpdate(prevProps, prevState) {
     if (prevState.country !== this.state.country) {
+      this.setState({ loading: true });
       const response = await fetch(
         `https://newsapi.org/v2/top-headlines?country=${
           this.state.country
@@ -51,16 +53,19 @@ class APICall extends React.Component {
 
   //this function handles the new value entered to the 'search' input tag
   handleChange = e => {
-    this.setState({
-      value: e.target.value
-    });
+    this.setState(
+      {
+        value: e.target.value
+      },
+      () => this.updateSearch()
+    );
+    console.log(this.state.value);
   };
 
   /*this is a super algorithm. sexy hacking!!! Thanks to George for the initiative and help....badass hacker. 
   this function has access to country/country codes data from the country component. It looks for the current input value and finds a match in the countries component object. It then gets the corresponding initials of the matched country and returns it */
   matchQuery = () => {
     const objKey = Object.keys(countryCodes);
-
     const objData = objKey.filter(
       item => item.toLowerCase() === this.state.value.toLowerCase()
     );
@@ -72,7 +77,7 @@ class APICall extends React.Component {
         countryCode = countryCodes[key].split(" ")[0];
       }
     }
-
+    console.log(countryCode);
     return countryCode;
   };
 
@@ -87,22 +92,21 @@ class APICall extends React.Component {
   render() {
     return (
       <div style={apiStyles.body}>
-        {/* <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-          placeholder="country name"
-        /> */}
-        <select onChange={this.handleChange}>
+        <select value={this.state.value} onChange={this.handleChange}>
           <option value="">select a country</option>
-          <option value="nigeria">nigeria</option>
-          <option value="france">france</option>
+          {countries.map((country, index) => (
+            <option key={index} value={country}>
+              {country}
+            </option>
+          ))}
         </select>
-        <br />
-        <button onClick={this.updateSearch}>search</button>
         <div>
           {/* here i passed the loading and dataset/api data to the content component for rendering */}
-          <Content loading={this.state.loading} content={this.state.dataSet} />
+          <Content
+            loading={this.state.loading}
+            content={this.state.dataSet}
+            heading={this.state.value}
+          />
         </div>
       </div>
     );

@@ -1,42 +1,44 @@
 import React from "react";
 import contentStyles from "../styles/Content.module.css";
+import giphy from "./images/giphy.gif";
+import showMore from "./images/images2.png";
 
 const Content = props => {
-  const { content, loading } = props;
-  const loader = (
-    <div>
-      <div
-        class="tenor-gif-embed"
-        data-postid="9856796"
-        data-share-method="host"
-        data-width="100%"
-        data-aspect-ratio="1.5"
-      >
-        <a href="https://tenor.com/view/loading-gif-9856796">Loading GIF</a>{" "}
-        from <a href="https://tenor.com/search/loading-gifs">Loading GIFs</a>
-      </div>
-      <script type="text/javascript" async src="https://tenor.com/embed.js" />
-    </div>
-  );
-
+  const { content, loading, heading } = props;
   return (
-    <div>
-      {!loading
-        ? content.articles.map((item, index) => (
-            <div key={index}>
-              <h3>{item.title.toUpperCase()}</h3>
-              <img
-                src={item.urlToImage}
-                alt="please visit news_api"
-                style={{ width: "70%", height: "40%" }}
-              />
-              <p>{item.description}</p>
+    <div style={contentStyles.body}>
+      <h2>{heading && `Latest Happenings in ${heading}`}</h2>
+      {!loading ? (
+        content.articles.map((item, index) => (
+          <div style={contentStyles.content} key={index}>
+            <h4>{item.title.toUpperCase()}</h4>
+            <img
+              src={item.urlToImage}
+              alt="please visit news_api"
+              style={{ width: "70%", height: "40%" }}
+            />
+            <p>
+              {item.description} &nbsp;
               <a href={item.url} target="blank">
-                ...full story
+                <img src={showMore} alt="" style={{ width: "1.5%" }} />
               </a>
-            </div>
-          ))
-        : loader}
+            </p>
+            <br />
+            <br />
+          </div>
+        ))
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "75vh"
+          }}
+        >
+          <img src={giphy} alt="" />
+        </div>
+      )}
     </div>
   );
 };
