@@ -10,10 +10,9 @@ class APICall extends React.Component {
   //The various states in play
   state = {
     dataSet: [],
-    value: "nigeria",
+    value: "",
     country: "NG",
-    loading: true,
-    k: true
+    loading: true
   };
 
   // handleGetNews = () => {};
@@ -55,22 +54,21 @@ class APICall extends React.Component {
 
   //this function handles the new value entered to the 'search' input tag
   handleChange = e => {
-    const data = e.target.value;
-    console.log(data);
-    this.setState({
-      value: e.target.value
-    });
-    this.updateSearch(data);
+    this.setState(
+      {
+        value: e.target.value
+      },
+      () => this.updateSearch()
+    );
+    console.log(this.state.value);
   };
 
   /*this is a super algorithm. sexy hacking!!! Thanks to George for the initiative and help....badass hacker. 
   this function has access to country/country codes data from the country component. It looks for the current input value and finds a match in the countries component object. It then gets the corresponding initials of the matched country and returns it */
-
-  matchQuery = data => {
+  matchQuery = () => {
     const objKey = Object.keys(countryCodes);
-    console.log(data, "data");
     const objData = objKey.filter(
-      item => item.toLowerCase() === data.toLowerCase()
+      item => item.toLowerCase() === this.state.value.toLowerCase()
     );
 
     let countryCode = "";
@@ -80,38 +78,29 @@ class APICall extends React.Component {
         countryCode = countryCodes[key].split(" ")[0];
       }
     }
-
+    console.log(countryCode);
     return countryCode;
   };
 
   //this function fires when the 'search' button is clicked. it updates the country state with the returned value from the matchquery function. this updated state serves as a query for the searched country
-  updateSearch = data => {
-    // console.log(this.state.country, "hiiiiiiiiiiiii", this.state.value);
-    console.log(this.state.value, "lllllll");
+  updateSearch = () => {
     if (!this.state.value) return;
     this.setState({
-      country: this.matchQuery(data)
+      country: this.matchQuery()
     });
   };
 
   render() {
-    const AllCountries = countries.map(country => country);
     return (
       <div style={apiStyles.body}>
-        {/* <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-          placeholder="country name"
-        /> */}
-        <select onChange={this.handleChange}>
-          <option value="nigeria">select a country</option>
-          {countries.map(country => (
-            <option value={country}>{country}</option>
+        <select value={this.state.value} onChange={this.handleChange}>
+          <option value="">select a country</option>
+          {countries.map((country, index) => (
+            <option key={index} value={country}>
+              {country}
+            </option>
           ))}
         </select>
-        <br />
-        {/* <button onClick={this.updateSearch}>search</button> */}
         <div>
           {/* here i passed the loading and dataset/api data to the content component for rendering */}
           <Content loading={this.state.loading} content={this.state.dataSet} />
