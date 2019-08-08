@@ -102,7 +102,11 @@ class APICall extends React.Component {
         </select>
         <div>
           {/* here i passed the loading and dataset/api data to the content component for rendering */}
-          <Content loading={this.state.loading} content={this.state.dataSet} />
+          <Content
+            loading={this.state.loading}
+            content={this.state.dataSet}
+            heading={this.state.value}
+          />
         </div>
       </div>
     );
