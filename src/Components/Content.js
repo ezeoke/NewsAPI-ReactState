@@ -5,7 +5,6 @@ import showMore from "./images/images2.png";
 
 const Content = props => {
   const { content, loading, heading } = props;
-  console.log(content);
   return (
     <div style={contentStyles.body}>
       <h2>{heading && `Latest Happenings in ${heading}`}</h2>
