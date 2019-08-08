@@ -19,7 +19,6 @@ class APICall extends React.Component {
   //This async lifecycle mounts with the default state when the application is started
   async componentDidMount() {
     //This an API fetch request with query and API key
-
     const response = await fetch(
       `https://newsapi.org/v2/top-headlines?country=${
         this.state.country
