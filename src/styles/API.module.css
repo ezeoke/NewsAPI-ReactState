@@ -20,6 +20,7 @@ body {
 
 @media only screen and (max-width: 480px) {
 	.wrapper select {
-		width: 60%
+		width: 60%;
+		margin-bottom: 5%
 	}
 }
