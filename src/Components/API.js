@@ -5,8 +5,7 @@ import apiStyles from "../styles/API.module.css";
 import Footer from "./Footer";
 
 //The API key from news_api is stored in the .env.development for private access
-// const Api_key = process.env.REACT_APP_API_KEY;
-const Api_key = "61eb1454095f4205b4c510c8367d8a23";
+const Api_key = process.env.REACT_APP_API_KEY;
 
 class APICall extends React.Component {
   //The various states in play
